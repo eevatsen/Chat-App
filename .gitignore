@@ -1,0 +1,174 @@
+# ---------------------------
+# OS / Editor
+# ---------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# VS Code
+.vscode/
+.history/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# JetBrains Rider / IntelliJ
+.idea/
+*.sln.iml
+
+# ---------------------------
+# Dotnet / Visual Studio builds
+# ---------------------------
+# Build Folders
+bin/
+obj/
+out/
+publish/
+artifacts/
+
+# Rider caches
+.idea/
+
+# Rider .NET temporary files
+*.DotSettings.user
+
+# NuGet packages
+*.nupkg
+packages/
+.nuget/
+
+# Visual Studio publish profiles
+*.Publish.xml
+*.publishsettings
+Properties/PublishProfiles/
+
+# Logs and test results
+*.log
+TestResults/
+coverage/
+coverage*.xml
+*.trx
+
+# Database files
+*.mdf
+*.ldf
+*.ndf
+
+# User-secrets file (if accidentally added)
+secrets.json
+
+# EF Migrations snapshot build output (optional)
+**/Migrations/*[Tt]emp*/
+
+# ---------------------------
+# ASP.NET Core / appsettings
+# ---------------------------
+# appsettings that may contain secrets — do NOT commit production secrets
+appsettings.*.json
+appsettings.*.Local.json
+appsettings.*.Development.json
+
+# If you use local certificate files / PFX
+*.pfx
+*.cer
+*.key
+
+# Kestrel HTTPS certificates (if used)
+localhost-*.pfx
+
+# ---------------------------
+# Azure
+# ---------------------------
+# Azure publish profile
+*azure-publish-settings*.publishsettings
+
+# Azure Functions local.settings
+local.settings.json
+
+# Key Vault, credentials (do not track)
+*.vault
+
+# ---------------------------
+# Node / Angular
+# ---------------------------
+# node / npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Angular build output
+dist/
+dist-*/
+tmp/
+.temp/
+.angular/cache/
+
+# Angular environment local files (if you keep secrets)
+src/environments/environment.*.local.ts
+src/environments/environment.*.secret.ts
+
+# local IDE config / lock files (but keep lock files like package-lock.json or yarn.lock if you want deterministic installs)
+# (we DO NOT ignore package-lock.json or yarn.lock by default)
+# If you use pnpm:
+.pnpm-store/
+
+# coverage / test
+coverage/
+nyc_output/
+
+# ---------------------------
+# Misc / Tools
+# ---------------------------
+# dotenv files
+.env
+.env.*
+!.env.example
+
+# VS Code extension recommendations (do not commit workspace settings)
+.vscode/*
+
+# Docker
+docker-compose.override.yml
+docker-compose.*.yml
+**/Dockerfile*
+
+# Certificates / sensitive files
+*.pem
+*.key
+*.crt
+
+# Logs, temp
+logs/
+*.log
+tmp/
+temp/
+
+# OS temp
+*.swp
+*.swo
+
+# ---------------------------
+# Optional: editorconfig / local dev artifacts
+# ---------------------------
+# Local launch settings
+Properties/launchSettings.json
+
+# If you want to keep launchSettings.json under source control, remove above line.
+# ---------------------------
+# End of file
+# ---------------------------

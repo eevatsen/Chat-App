@@ -1,0 +1,13 @@
+{
+  "/chatHub": {
+    "target": "https://localhost:5001",
+    "secure": false,
+    "changeOrigin": true,
+    "ws": true
+  },
+  "/messages": {
+    "target": "https://localhost:5001",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
