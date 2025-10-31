@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
 using ChatApp.Server.Data;
+using ChatApp.Server.Hubs;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR().AddAzureSignalR();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -30,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapHub<ChatHub>("/chatHub");
 app.UseHttpsRedirection();
 app.UseCors("AllowClient");
 app.UseAuthorization();
