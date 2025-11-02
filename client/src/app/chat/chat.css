@@ -1,0 +1,133 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.chat-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 70vh; 
+  background: #f9f9f9;
+}
+
+h2 {
+  text-align: center;
+  margin: 0;
+  padding: 16px;
+  background: #0078d4; 
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.message-list {
+  flex-grow: 1;
+  overflow-y: auto; 
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffffff;
+}
+
+.message-item {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  word-wrap: break-word; 
+}
+
+.message-item.sent {
+  background: #0078d4;
+  color: white;
+  align-self: flex-end; 
+  border-bottom-right-radius: 4px;
+}
+
+.message-item.received {
+  background: #e9e9eb;
+  color: #000;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.message-item.sent .message-header strong {
+  display: none;
+}
+
+.message-sentiment {
+  font-size: 1rem;
+  margin-left: 8px;
+}
+
+.message-timestamp {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.message-item.received .message-timestamp {
+  text-align: left;
+}
+
+.message-input-area {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #e0e0e0;
+  background: #f4f4f4;
+}
+
+.message-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.send-button {
+  padding: 10px 20px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.send-button:hover {
+  background-color: #005a9e;
+}
+
+.send-button:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.user-prompt {
+  width: 100%;
+  text-align: center;
+  color: #777;
+  padding: 10px;
+}

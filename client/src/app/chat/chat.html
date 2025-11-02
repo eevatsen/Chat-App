@@ -1,0 +1,45 @@
+<div class="chat-container">
+  <h2>Reenbit Chat App</h2>
+  
+  <div class="message-list" #messageContainer>
+    <div *ngFor="let msg of messages$ | async" 
+         class="message-item" 
+         [ngClass]="{
+           'sent': msg.user === sUser(), 
+           'received': msg.user !== sUser()
+         }">
+         
+      <div class="message-header">
+        <strong>{{ msg.user }}</strong>
+        <!-- <span class="message-sentiment" [ngClass]="msg.sentiment">
+          {{ getSentimentEmoji(msg.sentiment) }}
+        </span> -->
+      </div>
+      <div class="message-body">
+        {{ msg.text }}
+      </div>
+      <div class="message-timestamp">
+        {{ msg.timesent | date:'HH:mm' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="message-input-area" *ngIf="sUser()">
+    <input 
+      type="text" 
+      class="message-input"
+      placeholder="Введіть повідомлення..."
+      [(ngModel)]="sMessage"
+      (keyup.enter)="sendMessage()" />
+    <button 
+      class="send-button"
+      (click)="sendMessage()" 
+      [disabled]="!sMessage()">
+      Відправити
+    </button>
+  </div>
+  
+  <div class="message-input-area" *ngIf="!sUser()">
+    <em class="user-prompt">Будь ласка, оновіть сторінку та введіть ім'я, щоб почати чат.</em>
+  </div>
+</div>

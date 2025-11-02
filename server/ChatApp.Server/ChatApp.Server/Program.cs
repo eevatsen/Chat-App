@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSignalR().AddAzureSignalR();
+builder.Services.AddSignalR();//.AddAzureSignalR();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -32,11 +32,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapHub<ChatHub>("/chatHub");
+
 app.UseHttpsRedirection();
-app.UseCors("AllowClient");
+app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<ChatApp.Server.Hubs.ChatHub>("/chatHub");
 app.Run();

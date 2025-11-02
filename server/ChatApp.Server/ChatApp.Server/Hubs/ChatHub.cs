@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using ChatApp.Server.Models;
-using ChatApp.Server.Data;
-using Microsoft.IdentityModel.Tokens;
+using ChatApp.Server.Data; 
+using ChatApp.Server.Models; 
 
 namespace ChatApp.Server.Hubs
 {
@@ -14,15 +13,20 @@ namespace ChatApp.Server.Hubs
             _context = context;
         }
 
-        public async Task SendMessage(string user, string text)
+        public async Task SendMessage(string user, string message)
         {
-            Message message = new Message{
+            var chatMessage = new Message
+            {
                 UserSent = user,
-                Text = text
+                Text = message, 
+                TimeSent = DateTime.UtcNow
             };
 
-            await _context.AddAsync(message);
-            await Clients.All.SendAsync("RecieveMessage", user, text);
+            _context.Messages.Add(chatMessage);
+            await _context.SaveChangesAsync();
+
+
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
     }
 }
