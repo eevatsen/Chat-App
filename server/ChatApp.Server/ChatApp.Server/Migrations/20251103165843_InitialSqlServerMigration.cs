@@ -1,13 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace ChatApp.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialSqlServerMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,11 +15,12 @@ namespace ChatApp.Server.Migrations
                 name: "Messages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Text = table.Column<string>(type: "text", nullable: false),
-                    TimeSent = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserSent = table.Column<string>(type: "text", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeSent = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserSent = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sentiment = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
