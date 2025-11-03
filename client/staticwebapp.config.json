@@ -2,11 +2,11 @@
   "routes": [
     {
       "route": "/api/*",
-      "rewrite": "https://chat-backend.azurewebsites.net/api/*"
+      "rewrite": "chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/api/*"
     },
     {
       "route": "/chatHub/*",
-      "rewrite": "https://chat-backend.azurewebsites.net/chatHub/*",
+      "rewrite": "chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/chatHub/*",
       "allowedMethods": ["GET", "POST"] 
     }
   ],
