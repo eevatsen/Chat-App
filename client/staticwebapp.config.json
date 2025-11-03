@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "rewrite": "https://Chat-App-Backend.azurewebsites.net/api/*"
+    },
+    {
+      "route": "/chatHub/*",
+      "rewrite": "https://Chat-App-Backend.azurewebsites.net/chatHub/*"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html"
+    }
+  }
+}
