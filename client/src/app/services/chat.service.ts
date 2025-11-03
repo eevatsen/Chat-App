@@ -16,7 +16,7 @@ export class ChatService {
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://proud-island-01049aa03.3.azurestaticapps.net/chatHub') 
+      .withUrl('https://chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/chatHub') 
       .withAutomaticReconnect()
       .build();
   }
