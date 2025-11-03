@@ -19,7 +19,7 @@ builder.Services.AddSingleton<TextAnalyticsClient>(sp =>
     var credential = new AzureKeyCredential(configuration["TextAnalytics:Key"]);
     return new TextAnalyticsClient(endpoint, credential);
 });
-builder.Services.AddSignalR().AddAzureSignalR();
+builder.Services.AddSignalR().AddAzureSignalR("Endpoint=https://chatapplication-signalr.service.signalr.net;AccessKey=BVBgjbxkv09s5kvDodNhWpoU1favT8B3x15dCsziROLJsyPgaCWpJQQJ99BJACE1PydXJ3w3AAAAASRSHo9B;Version=1.0;");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
