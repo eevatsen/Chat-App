@@ -44,6 +44,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+app.UseWebSockets();
 app.UseAuthorization();
 
 app.MapControllers();
