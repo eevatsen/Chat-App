@@ -40,14 +40,14 @@ export class ChatService {
     }
   }
 
-  public async sendMessage(user: string, message: string, sentiment?: string) {
+  public async sendMessage(user: string, message: string) {
     if (this.hubConnection.state !== signalR.HubConnectionState.Connected) {
       console.error('Hub not connected');
       return;
     }
 
     try {
-      await this.hubConnection.invoke('SendMessage', user, message, sentiment);
+      await this.hubConnection.invoke('SendMessage', user, message);
     } catch (err) {
       console.error('Error while sending message: ' + err);
     }
