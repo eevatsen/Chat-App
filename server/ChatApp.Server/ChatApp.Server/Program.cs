@@ -19,7 +19,7 @@ builder.Services.AddSingleton<TextAnalyticsClient>(sp =>
     var credential = new AzureKeyCredential(configuration["TextAnalytics:Key"]);
     return new TextAnalyticsClient(endpoint, credential);
 });
-builder.Services.AddSignalR();//.AddAzureSignalR();
+builder.Services.AddSignalR().AddAzureSignalR();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -31,7 +31,7 @@ builder.Services.AddCors(options =>
         });
 });
 builder.Services.AddDbContext<ChatDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
