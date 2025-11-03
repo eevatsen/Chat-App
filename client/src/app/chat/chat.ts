@@ -54,27 +54,24 @@ export class ChatComponent implements OnInit, OnDestroy {
   sendMessage() {
     const user = this.sUser();
     const message = this.sMessage();
-
     if (user && message) {
       this.chatService.sendMessage(user, message);
       this.sMessage.set(''); 
     }
   }
 
-  // getSentimentEmoji(sentiment?: string): string {
-  //   switch (sentiment) {
-  //     case 'positive':
-  //       return '😊';
-  //     case 'negative':
-  //       return '😠';
-  //     case 'neutral':
-  //       return '😐';
-  //     case 'mixed':
-  //       return '🤔';
-  //     default:
-  //       return '';
-  //   }
-  // }
+  getSentimentEmoji(sentiment?: string): string {
+    switch (sentiment) {
+      case 'positive':
+        return '😊';
+      case 'negative':
+        return '😠';
+      case 'neutral':
+        return '😐';
+      default:
+        return '';
+    }
+  }
 
   private scrollToBottom(): void {
     try {

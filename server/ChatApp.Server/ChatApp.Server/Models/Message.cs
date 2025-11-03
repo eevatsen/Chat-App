@@ -6,5 +6,6 @@
         public string Text { get; set; }
         public DateTime TimeSent { get; set; }
         public string UserSent { get; set; }
+        public string? Sentiment { get; set; }
     }
 }

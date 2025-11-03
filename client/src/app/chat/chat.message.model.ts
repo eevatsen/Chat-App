@@ -3,5 +3,5 @@ export interface ChatMessage {
   user: string;
   text: string; 
   timesent?: Date;
-  //sentiment?: 'positive' | 'negative' | 'neutral' | 'mixed';
+  sentiment?: 'positive' | 'negative' | 'neutral' ;
 }

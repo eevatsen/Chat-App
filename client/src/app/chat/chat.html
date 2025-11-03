@@ -1,5 +1,5 @@
 <div class="chat-container">
-  <h2>Reenbit Chat App</h2>
+  <h2>Chat App</h2>
   
   <div class="message-list" #messageContainer>
     <div *ngFor="let msg of messages$ | async" 
@@ -14,9 +14,9 @@
          
       <div class="message-header">
         <strong>{{ msg.user }}</strong>
-        <!-- <span class="message-sentiment" [ngClass]="msg.sentiment">
+        <span class="message-sentiment" [ngClass]="msg.sentiment">
           {{ getSentimentEmoji(msg.sentiment) }}
-        </span> -->
+        </span>
       </div>
       <div class="message-body">
         {{ msg.text }}
