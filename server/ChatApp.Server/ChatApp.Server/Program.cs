@@ -40,10 +40,10 @@ using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<ChatDbContext>();
         dbContext.Database.Migrate();
+        Console.WriteLine("!!! Database migration applied successfully.");
     }
     catch (Exception ex)
     {
-        // У разі помилки міграції, ми побачимо це в Log Stream
         Console.WriteLine($"!!! An error occurred while migrating the database: {ex.Message}");
     }
 }
@@ -55,9 +55,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+app.UseHttpsRedirection();
+
 app.UseWebSockets();
 app.UseAuthorization();
 
