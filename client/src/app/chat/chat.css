@@ -131,3 +131,63 @@ h2 {
   color: #777;
   padding: 10px;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Анімація для негативних повідомлень */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
+/* Анімація для позитивних повідомлень */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(40, 167, 69, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+
+
+.message-item {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.message-item.positive {
+  animation: pulse 1.5s ease-out;
+  border: 2px solid #05f73d;
+}
+
+.message-item.received.positive {
+  animation: pulse 2s ease-out;
+  border: 1px solid #05f73d; 
+}
+
+.message-item.negative {
+  animation: shake 0.4s ease-in-out;
+  border: 1px solid #dc3545; 
+}
+
+.message-sentiment {
+  font-size: 1.1rem;
+  opacity: 1;
+}
