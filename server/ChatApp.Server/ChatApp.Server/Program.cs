@@ -40,7 +40,7 @@ using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<ChatDbContext>();
         dbContext.Database.Migrate();
-        Console.WriteLine("!!! Database migration applied successfully.");
+        Console.WriteLine("!!!                    Database migration applied successfully.                            !!!!!!!!");
     }
     catch (Exception ex)
     {
