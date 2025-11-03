@@ -2,11 +2,11 @@
   "routes": [
     {
       "route": "/api/*",
-      "rewrite": "https://chat-backend.azurewebsites.net/api/*"
+      "rewrite": "https://proud-island-01049aa03.3.azurestaticapps.net/api/*"
     },
     {
       "route": "/chatHub/*",
-      "rewrite": "https://chat-backend.azurewebsites.net/chatHub/*",
+      "rewrite": "https://proud-island-01049aa03.3.azurestaticapps.net/chatHub/*",
       "allowedMethods": ["GET", "POST"]
     }
   ],
