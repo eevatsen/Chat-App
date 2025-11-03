@@ -6,7 +6,8 @@
     },
     {
       "route": "/chatHub/*",
-      "rewrite": "https://Chat-App-Backend.azurewebsites.net/chatHub/*"
+      "rewrite": "https://Chat-App-Backend.azurewebsites.net/chatHub/*",
+      "allowedMethods": ["GET", "POST"] 
     }
   ],
   "navigationFallback": {
