@@ -16,7 +16,9 @@ export class ChatService {
 
   constructor() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/chatHub') 
+      .withUrl('https://chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/chatHub', {
+        withCredentials: false
+      }) 
       .withAutomaticReconnect()
       .build();
   }
