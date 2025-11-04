@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, tap, map } from 'rxjs';
 import { ChatMessage } from '../chat/chat.message.model';
 import { HttpClient } from '@angular/common/http';
 
@@ -56,15 +56,15 @@ export class ChatService {
   }
 
   private registerReceiveHandler() {
-    this.hubConnection.on('ReceiveMessage',
-    (user: string, message: string, timeIso: string, sentiment?: string) => {
-      const time = timeIso ? new Date(timeIso) : new Date();
-      const fullMessage: ChatMessage = {
-        user,
-        text: message,
-        sentiment: sentiment?.toLowerCase() as any,
-        timesent: time,
-      };
+    this.hubConnection.on(
+      'ReceiveMessage',
+      (user: string, message: string, time: Date, sentiment?: string) => {
+        const fullMessage: ChatMessage = {
+          user: user,
+          text: message,
+          sentiment: sentiment?.toLowerCase() as any,
+          timesent: time,
+        };
 
         const currentMessages = this.messagesSubject.value;
         this.messagesSubject.next([...currentMessages, fullMessage]);
@@ -73,13 +73,32 @@ export class ChatService {
   }
 
   private loadHistory() {
-    this.http.get<ChatMessage[]>('https://chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/api/messages')
-      .pipe(
-        tap(messages => console.log(`Loaded ${messages.length} messages from history`))
+  this.http
+    .get<ChatMessage[]>('https://chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/api/messages')
+    .pipe(
+      tap(messages => console.log(`Loaded ${messages.length} messages from history`)),
+      // нормалізація дат
+      map(messages =>
+        messages.map(m => {
+          let time: Date | undefined = undefined;
+          if (m.timesent) {
+            const ts = String(m.timesent);
+            // якщо немає Z або зсуву — додаємо Z (означає UTC)
+            const normalized = /[zZ]|[+\-]\d{2}:\d{2}$/.test(ts) ? ts : ts + 'Z';
+            time = new Date(normalized);
+          }
+
+          return {
+            ...m,
+            timesent: time,
+            sentiment: m.sentiment?.toLowerCase(),
+          } as ChatMessage;
+        })
       )
-      .subscribe({
-        next: (messages) => this.messagesSubject.next(messages),
-        error: (err) => console.error('Could not load chat history:', err)
-      });
-  }
+    )
+    .subscribe({
+      next: (messages) => this.messagesSubject.next(messages),
+      error: (err) => console.error('Could not load chat history:', err),
+    });
+}
 }
