@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (savedUser) {
       this.sUser.set(savedUser);
     } else {
-      const newUser = prompt('Будь ласка, введіть ваше ім\'я:');
+      const newUser = prompt('Enter your name:');
       if (newUser) {
         this.sUser.set(newUser);
         localStorage.setItem('chatUser', newUser);

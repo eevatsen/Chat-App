@@ -34,7 +34,7 @@ namespace ChatApp.Server.Hubs
 
             string msgVibe = "neutral";
 
-            // 1) Sentiment analysis with logging
+            // sentiment analysis with logging
             try
             {
                 DocumentSentiment documentSentiment = await _textAnalyticsClient.AnalyzeSentimentAsync(message);
@@ -44,13 +44,11 @@ namespace ChatApp.Server.Hubs
             }
             catch (Exception ex)
             {
-                // log full exception and continue with fallback sentiment
                 _logger.LogWarning(ex, "Error analyzing sentiment. ConnectionId={ConnectionId}, User={User}, MessageSample={Sample}",
                     connectionId, user, message.Length > 200 ? message.Substring(0, 200) + "..." : message);
                 msgVibe = "dont know";
             }
 
-            // Prepare entity
             var chatMessage = new Message
             {
                 UserSent = user,
@@ -59,7 +57,6 @@ namespace ChatApp.Server.Hubs
                 Sentiment = msgVibe
             };
 
-            // 2) Save to DB with error handling & logging
             try
             {
                 _context.Messages.Add(chatMessage);
@@ -73,25 +70,21 @@ namespace ChatApp.Server.Hubs
                 _logger.LogError(ex, "Failed to save message to DB. ConnectionId={ConnectionId}, User={User}, MessageSample={Sample}",
                     connectionId, user, message.Length > 200 ? message.Substring(0, 200) + "..." : message);
 
-                // Inform caller about the failure so client UX can show friendly message
                 try
                 {
                     await Clients.Caller.SendAsync("ServerError", "Unable to save message due to server error.");
                 }
                 catch (Exception sendEx)
                 {
-                    // Log if we also fail to notify client
                     _logger.LogError(sendEx, "Failed to notify caller about DB error. ConnectionId={ConnectionId}, User={User}", connectionId, user);
                 }
 
-                // Do not proceed to broadcast if save failed
                 return;
             }
 
-            // 3) Broadcast to clients with logging
             try
             {
-                await Clients.All.SendAsync("ReceiveMessage", user, message, msgVibe);
+                await Clients.All.SendAsync("ReceiveMessage", user, message, chatMessage.TimeSent, msgVibe);
                 _logger.LogInformation("Broadcasted message. ConnectionId={ConnectionId}, User={User}, Sentiment={Sentiment}",
                     connectionId, user, msgVibe);
             }
@@ -100,7 +93,6 @@ namespace ChatApp.Server.Hubs
                 _logger.LogError(ex, "Failed to broadcast message. ConnectionId={ConnectionId}, User={User}, MessageLength={Len}",
                     connectionId, user, message?.Length ?? 0);
 
-                // Try to tell caller we had a problem broadcasting
                 try
                 {
                     await Clients.Caller.SendAsync("ServerError", "Message saved but failed to broadcast to other clients.");

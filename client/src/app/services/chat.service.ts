@@ -58,12 +58,12 @@ export class ChatService {
   private registerReceiveHandler() {
     this.hubConnection.on(
       'ReceiveMessage',
-      (user: string, message: string, sentiment?: string) => {
+      (user: string, message: string, time: Date, sentiment?: string) => {
         const fullMessage: ChatMessage = {
-          user,
+          user: user,
           text: message,
           sentiment: sentiment?.toLowerCase() as any,
-          timesent: new Date(),
+          timesent: time,
         };
 
         const currentMessages = this.messagesSubject.value;
