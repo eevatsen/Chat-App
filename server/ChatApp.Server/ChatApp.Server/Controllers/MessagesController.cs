@@ -26,13 +26,14 @@ namespace ChatApp.Server.Controllers
         public async Task<IActionResult> GetMessages()
         {
             var messages = await _context.Messages
-                .OrderBy(m => m.TimeSent) 
+                .OrderBy(m => m.TimeSent)
                 .Select(m => new
                 {
                     id = m.Id,
                     user = m.UserSent,
                     text = m.Text,
-                    timesent = m.TimeSent,    
+                    // serialise as ISO 8601 with offset (round-trip)
+                    timesent = m.TimeSent.ToString("o"),
                     sentiment = m.Sentiment
                 })
                 .ToListAsync();

@@ -84,7 +84,7 @@ namespace ChatApp.Server.Hubs
 
             try
             {
-                await Clients.All.SendAsync("ReceiveMessage", user, message, chatMessage.TimeSent, msgVibe);
+                await Clients.All.SendAsync("ReceiveMessage", user, message, chatMessage.TimeSent.ToString("o"), msgVibe);
                 _logger.LogInformation("Broadcasted message. ConnectionId={ConnectionId}, User={User}, Sentiment={Sentiment}",
                     connectionId, user, msgVibe);
             }

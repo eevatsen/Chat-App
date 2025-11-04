@@ -56,15 +56,15 @@ export class ChatService {
   }
 
   private registerReceiveHandler() {
-    this.hubConnection.on(
-      'ReceiveMessage',
-      (user: string, message: string, time: Date, sentiment?: string) => {
-        const fullMessage: ChatMessage = {
-          user: user,
-          text: message,
-          sentiment: sentiment?.toLowerCase() as any,
-          timesent: time,
-        };
+    this.hubConnection.on('ReceiveMessage',
+    (user: string, message: string, timeIso: string, sentiment?: string) => {
+      const time = timeIso ? new Date(timeIso) : new Date();
+      const fullMessage: ChatMessage = {
+        user,
+        text: message,
+        sentiment: sentiment?.toLowerCase() as any,
+        timesent: time,
+      };
 
         const currentMessages = this.messagesSubject.value;
         this.messagesSubject.next([...currentMessages, fullMessage]);
