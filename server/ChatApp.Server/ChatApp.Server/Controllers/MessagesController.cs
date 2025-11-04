@@ -23,9 +23,22 @@ namespace ChatApp.Server.Controllers
 
         // GET: api/Messages
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Message>>> GetMessages()
+        public async Task<IActionResult> GetMessages()
         {
-            return await _context.Messages.ToListAsync();
+            var messages = await _context.Messages
+                                         .OrderBy(m => m.TimeSent) 
+                                         .ToListAsync();
+
+            var response = messages.Select(m => new
+            {
+                id = m.Id,
+                user = m.UserSent, 
+                text = m.Text,
+                timesent = m.TimeSent, 
+                sentiment = m.Sentiment
+            });
+
+            return Ok(response);
         }
 
         // GET: api/Messages/5
