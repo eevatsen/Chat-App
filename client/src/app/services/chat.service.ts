@@ -73,7 +73,7 @@ export class ChatService {
   }
 
   private loadHistory() {
-    this.http.get<ChatMessage[]>('/api/messages')
+    this.http.get<ChatMessage[]>('https://chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/api/messages')
       .pipe(
         tap(messages => console.log(`Loaded ${messages.length} messages from history`))
       )
