@@ -7,7 +7,7 @@
     {
       "route": "/chatHub/*",
       "rewrite": "https://chat-backend-aqe2fmawcsc6gygz.polandcentral-01.azurewebsites.net/chatHub/*",
-      "allowedMethods": ["GET", "POST"]
+      "allowedMethods": ["GET", "POST", "DELETE"]
     }
   ],
   "navigationFallback": {

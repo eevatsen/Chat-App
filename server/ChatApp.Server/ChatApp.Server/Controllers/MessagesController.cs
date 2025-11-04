@@ -53,6 +53,13 @@ namespace ChatApp.Server.Controllers
 
             return message;
         }
-
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAllMessages()
+        {
+            var allMessages = _context.Messages;
+            _context.Messages.RemoveRange(allMessages);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
